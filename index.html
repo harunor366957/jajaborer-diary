@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>যাযাবরের ডায়েরি | ভ্রমণ, জীবনবোধ ও গল্পের সংকলন</title>
-    <meta name="description" content="যাযাবরের ডায়েরি - পথের বাঁকে কুড়িয়ে পাওয়া জীবনের গল্প, ভ্রমণ অভিজ্ঞতা, বইয়ের পাতা আর নিভৃত ভাবনার একান্ত ঠিকানা।">
-    <meta name="keywords" content="যাযাবরের ডায়েরি, বাংলা ব্লগ, ভ্রমণ কাহিনী, জীবনবোধ, বাংলা গল্প, Jajaborer Diary">
+    <title>যাযাবরের ডায়েরি | ৬৪ জেলা ভ্রমণ, জীবনবোধ ও গল্পের সংকলন</title>
+    <meta name="description" content="যাযাবরের ডায়েরি - বাংলাদেশের ৬৪ জেলা ভ্রমণের স্বপ্ন, পথের বাঁকে কুড়িয়ে পাওয়া জীবনের গল্প ও নিভৃত ভাবনার একান্ত ঠিকানা।">
+    <meta name="keywords" content="যাযাবরের ডায়েরি, ৬৪ জেলা ভ্রমণ, বাংলা ব্লগ, ভ্রমণ কাহিনী, স্মৃতির অ্যালবাম, Jajaborer Diary">
     
     <!-- Google Fonts: Hind Siliguri & Noto Serif Bengali -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -49,7 +49,6 @@
             margin-bottom: 1.15rem;
             line-height: 1.85;
         }
-        /* Custom Scrollbar */
         ::-webkit-scrollbar {
             width: 8px;
         }
@@ -81,10 +80,15 @@
             </a>
 
             <!-- Actions -->
-            <div class="flex items-center gap-2 sm:gap-3">
-                <button onclick="openNewPostModal()" class="inline-flex items-center gap-1.5 bg-brand-600 hover:bg-brand-700 text-white text-sm font-medium px-3.5 py-2 rounded-lg shadow-sm transition cursor-pointer">
+            <div class="flex items-center gap-1.5 sm:gap-2.5">
+                <button onclick="openNewPostModal()" class="inline-flex items-center gap-1 bg-brand-600 hover:bg-brand-700 text-white text-xs sm:text-sm font-medium px-3 py-2 rounded-lg shadow-sm transition cursor-pointer">
                     <i data-lucide="pen-line" class="w-4 h-4"></i>
                     <span>নতুন লেখা</span>
+                </button>
+
+                <button onclick="openNewMemoryModal()" class="inline-flex items-center gap-1 bg-amber-600 hover:bg-amber-700 text-white text-xs sm:text-sm font-medium px-3 py-2 rounded-lg shadow-sm transition cursor-pointer">
+                    <i data-lucide="camera" class="w-4 h-4"></i>
+                    <span>স্মৃতি যোগ</span>
                 </button>
 
                 <button onclick="openProfileModal()" title="প্রোফাইল এডিট" class="p-2 rounded-lg text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800 transition cursor-pointer">
@@ -111,9 +115,19 @@
                     <h1 id="hero-title" class="font-serif text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white mb-3">
                         স্বাগতম যাযাবরের ডায়েরিতে
                     </h1>
-                    <p id="hero-bio" class="text-slate-600 dark:text-slate-300 text-base sm:text-lg max-w-2xl leading-relaxed">
+                    <p id="hero-bio" class="text-slate-600 dark:text-slate-300 text-base sm:text-lg max-w-2xl leading-relaxed mb-5">
                         প্রতিদিনের ব্যস্ততার ফাঁকে দেখা প্রকৃতি, অচেনা পথের অভিজ্ঞতা, প্রিয় বইয়ের পাতা আর জীবনের ছোট ছোট উপলব্ধিগুলো শব্দে ধরে রাখার একান্ত ঠিকানা।
                     </p>
+                    <!-- Quick Jump Buttons -->
+                    <div class="flex flex-wrap items-center justify-center md:justify-start gap-3">
+                        <button onclick="switchMainTab('posts')" id="tab-btn-posts" class="px-4 py-2 rounded-xl text-sm font-semibold bg-brand-600 text-white shadow-sm transition cursor-pointer">
+                            ডায়েরি ও গল্প
+                        </button>
+                        <button onclick="switchMainTab('memories')" id="tab-btn-memories" class="px-4 py-2 rounded-xl text-sm font-semibold bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700 hover:border-amber-500 transition flex items-center gap-1.5 cursor-pointer">
+                            <i data-lucide="map-pin" class="w-4 h-4 text-amber-500"></i>
+                            <span>৬৪ জেলা ভ্রমণ ও স্মৃতি (<span id="hero-district-count">০</span>/৬৪)</span>
+                        </button>
+                    </div>
                 </div>
 
                 <!-- Right: Side Photo Frame -->
@@ -136,47 +150,81 @@
     <!-- Main Content -->
     <main class="max-w-5xl mx-auto px-4 sm:px-6 py-8 flex-1 w-full">
         
-        <!-- Search & Category Filter Bar -->
-        <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 mb-8">
-            <!-- Categories -->
-            <div id="category-tabs" class="flex items-center gap-2 overflow-x-auto pb-1">
-                <button onclick="filterByCategory('সব')" data-cat="সব" class="cat-btn active px-4 py-1.5 rounded-full text-sm font-medium bg-brand-600 text-white transition whitespace-nowrap cursor-pointer">
-                    সব লেখা
-                </button>
-                <button onclick="filterByCategory('ভ্রমণ')" data-cat="ভ্রমণ" class="cat-btn px-4 py-1.5 rounded-full text-sm font-medium bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-800 hover:border-brand-500 transition whitespace-nowrap cursor-pointer">
-                    ভ্রমণ
-                </button>
-                <button onclick="filterByCategory('জীবনবোধ')" data-cat="জীবনবোধ" class="cat-btn px-4 py-1.5 rounded-full text-sm font-medium bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-800 hover:border-brand-500 transition whitespace-nowrap cursor-pointer">
-                    জীবনবোধ
-                </button>
-                <button onclick="filterByCategory('গল্প')" data-cat="গল্প" class="cat-btn px-4 py-1.5 rounded-full text-sm font-medium bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-800 hover:border-brand-500 transition whitespace-nowrap cursor-pointer">
-                    গল্প
-                </button>
-                <button onclick="filterByCategory('বই ও সিনেমা')" data-cat="বই ও সিনেমা" class="cat-btn px-4 py-1.5 rounded-full text-sm font-medium bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-800 hover:border-brand-500 transition whitespace-nowrap cursor-pointer">
-                    বই ও সিনেমা
-                </button>
+        <!-- SECTION 1: BLOG POSTS -->
+        <div id="section-posts">
+            <!-- Search & Category Filter Bar -->
+            <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 mb-8">
+                <div id="category-tabs" class="flex items-center gap-2 overflow-x-auto pb-1">
+                    <button onclick="filterByCategory('সব')" data-cat="সব" class="cat-btn active px-4 py-1.5 rounded-full text-sm font-medium bg-brand-600 text-white transition whitespace-nowrap cursor-pointer">
+                        সব লেখা
+                    </button>
+                    <button onclick="filterByCategory('ভ্রমণ')" data-cat="ভ্রমণ" class="cat-btn px-4 py-1.5 rounded-full text-sm font-medium bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-800 hover:border-brand-500 transition whitespace-nowrap cursor-pointer">
+                        ভ্রমণ
+                    </button>
+                    <button onclick="filterByCategory('জীবনবোধ')" data-cat="জীবনবোধ" class="cat-btn px-4 py-1.5 rounded-full text-sm font-medium bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-800 hover:border-brand-500 transition whitespace-nowrap cursor-pointer">
+                        জীবনবোধ
+                    </button>
+                    <button onclick="filterByCategory('গল্প')" data-cat="গল্প" class="cat-btn px-4 py-1.5 rounded-full text-sm font-medium bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-800 hover:border-brand-500 transition whitespace-nowrap cursor-pointer">
+                        গল্প
+                    </button>
+                    <button onclick="filterByCategory('বই ও সিনেমা')" data-cat="বই ও সিনেমা" class="cat-btn px-4 py-1.5 rounded-full text-sm font-medium bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-800 hover:border-brand-500 transition whitespace-nowrap cursor-pointer">
+                        বই ও সিনেমা
+                    </button>
+                </div>
+
+                <!-- Search Input -->
+                <div class="relative w-full sm:w-64">
+                    <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2"></i>
+                    <input type="text" id="search-input" oninput="handleSearch(this.value)" placeholder="লেখা খুঁজুন..." class="w-full pl-10 pr-4 py-2 text-sm rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-500">
+                </div>
             </div>
 
-            <!-- Search Input -->
-            <div class="relative w-full sm:w-64">
-                <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2"></i>
-                <input type="text" id="search-input" oninput="handleSearch(this.value)" placeholder="লেখা খুঁজুন..." class="w-full pl-10 pr-4 py-2 text-sm rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-500">
+            <!-- Posts Grid -->
+            <div id="posts-container" class="grid grid-cols-1 md:grid-cols-2 gap-6"></div>
+
+            <!-- Empty State -->
+            <div id="empty-state" class="hidden text-center py-16">
+                <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-slate-100 dark:bg-slate-900 flex items-center justify-center text-slate-400">
+                    <i data-lucide="book-open" class="w-8 h-8"></i>
+                </div>
+                <h3 class="text-lg font-semibold text-slate-800 dark:text-slate-200 mb-1">কোনো লেখা পাওয়া যায়নি</h3>
+                <p class="text-slate-500 dark:text-slate-400 text-sm mb-4">অন্য কোনো শব্দ দিয়ে খুঁজুন অথবা নতুন একটি লেখা যোগ করুন।</p>
+                <button onclick="resetFilters()" class="text-brand-600 dark:text-brand-500 text-sm font-medium hover:underline cursor-pointer">সব লেখা দেখুন</button>
             </div>
         </div>
 
-        <!-- Posts Grid -->
-        <div id="posts-container" class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <!-- Posts will be injected here via JS -->
-        </div>
+        <!-- SECTION 2: 64 DISTRICTS TRAVEL & MEMORY ALBUM -->
+        <div id="section-memories" class="hidden">
+            <!-- 64 Districts Progress Banner -->
+            <div class="bg-white dark:bg-slate-900 rounded-2xl p-6 border border-slate-200 dark:border-slate-800 shadow-sm mb-8">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4">
+                    <div>
+                        <span class="inline-flex items-center gap-1.5 text-xs font-semibold text-amber-600 dark:text-amber-400 uppercase tracking-wider mb-1">
+                            <i data-lucide="map" class="w-4 h-4"></i> স্বপ্নযাত্রা বাংলাদেশ
+                        </span>
+                        <h2 class="font-serif text-2xl font-bold text-slate-900 dark:text-white">৬৪ জেলা ভ্রমণ ও স্মৃতির ডায়েরি</h2>
+                        <p class="text-sm text-slate-600 dark:text-slate-400 mt-1">ভ্রমণ করা প্রতিটি জেলার ছবি, তারিখ ও প্রিয় মুহূর্তগুলো এখানে সাজানো আছে।</p>
+                    </div>
+                    <button onclick="openNewMemoryModal()" class="inline-flex items-center justify-center gap-1.5 bg-amber-600 hover:bg-amber-700 text-white text-sm font-medium px-4 py-2.5 rounded-xl shadow-sm transition shrink-0 cursor-pointer">
+                        <i data-lucide="plus-circle" class="w-4 h-4"></i>
+                        <span>নতুন জেলা ও ছবি যোগ করুন</span>
+                    </button>
+                </div>
 
-        <!-- Empty State -->
-        <div id="empty-state" class="hidden text-center py-16">
-            <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-slate-100 dark:bg-slate-900 flex items-center justify-center text-slate-400">
-                <i data-lucide="book-open" class="w-8 h-8"></i>
+                <!-- Progress Bar -->
+                <div class="space-y-1.5">
+                    <div class="flex justify-between text-xs font-medium text-slate-600 dark:text-slate-300">
+                        <span>ভ্রমণ সম্পন্ন হয়েছে: <strong id="visited-count-text" class="text-brand-600 dark:text-brand-400">০ টি জেলা</strong></span>
+                        <span id="visited-percent-text">০% (লক্ষ্য: ৬৪ জেলা)</span>
+                    </div>
+                    <div class="w-full h-3 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+                        <div id="district-progress-bar" class="h-full bg-gradient-to-r from-brand-500 to-amber-500 rounded-full transition-all duration-500" style="width: 0%"></div>
+                    </div>
+                </div>
             </div>
-            <h3 class="text-lg font-semibold text-slate-800 dark:text-slate-200 mb-1">কোনো লেখা পাওয়া যায়নি</h3>
-            <p class="text-slate-500 dark:text-slate-400 text-sm mb-4">অন্য কোনো শব্দ দিয়ে খুঁজুন অথবা নতুন একটি লেখা যোগ করুন।</p>
-            <button onclick="resetFilters()" class="text-brand-600 dark:text-brand-500 text-sm font-medium hover:underline cursor-pointer">সব লেখা দেখুন</button>
+
+            <!-- Memories Grid -->
+            <div id="memories-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
         </div>
 
     </main>
@@ -186,9 +234,9 @@
         <div class="max-w-5xl mx-auto px-4 sm:px-6 py-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-slate-500 dark:text-slate-400">
             <p>© ২০২৬ <span id="footer-title" class="font-medium text-slate-700 dark:text-slate-300">যাযাবরের ডায়েরি</span> — সর্বস্বত্ব সংরক্ষিত।</p>
             <div class="flex items-center gap-4">
-                <button onclick="exportPostsJSON()" class="hover:text-brand-600 transition flex items-center gap-1 cursor-pointer" title="নতুন লেখাগুলো ব্যাকআপ নিন">
+                <button onclick="exportAllDataJSON()" class="hover:text-brand-600 transition flex items-center gap-1 cursor-pointer" title="সব লেখা ও স্মৃতি ব্যাকআপ নিন">
                     <i data-lucide="download" class="w-4 h-4"></i>
-                    <span>লেখা ব্যাকআপ</span>
+                    <span>সম্পূর্ণ ব্যাকআপ</span>
                 </button>
             </div>
         </div>
@@ -209,6 +257,9 @@
                 </div>
             </div>
             <div class="p-6 sm:p-8 overflow-y-auto">
+                <div id="modal-cover-wrapper" class="hidden mb-5 rounded-xl overflow-hidden max-h-72 border border-slate-200 dark:border-slate-800">
+                    <img id="modal-cover-img" src="" alt="কভার ছবি" class="w-full h-full object-cover">
+                </div>
                 <div class="flex items-center gap-3 text-xs text-slate-500 dark:text-slate-400 mb-3">
                     <span id="modal-date" class="flex items-center gap-1"><i data-lucide="calendar" class="w-3.5 h-3.5"></i> তারিখ</span>
                     <span>•</span>
@@ -217,16 +268,14 @@
                 <h2 id="modal-title" class="font-serif text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white mb-6 leading-snug">
                     শিরোনাম
                 </h2>
-                <div id="modal-content" class="prose-content text-slate-700 dark:text-slate-300 text-base sm:text-lg">
-                    <!-- Paragraphs -->
-                </div>
+                <div id="modal-content" class="prose-content text-slate-700 dark:text-slate-300 text-base sm:text-lg"></div>
             </div>
         </div>
     </div>
 
-    <!-- New Post Modal -->
+    <!-- New Post Modal (With Cover Image Support) -->
     <div id="new-post-modal" class="fixed inset-0 z-50 hidden bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
-        <div class="bg-white dark:bg-slate-900 w-full max-w-xl rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-800 overflow-hidden">
+        <div class="bg-white dark:bg-slate-900 w-full max-w-xl max-h-[90vh] overflow-y-auto rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-800">
             <div class="px-6 py-4 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between">
                 <h3 class="font-serif font-bold text-lg text-slate-900 dark:text-white">নতুন ডায়েরি লিখুন</h3>
                 <button onclick="closeNewPostModal()" class="p-1.5 text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 rounded-lg cursor-pointer">
@@ -254,12 +303,58 @@
                     </div>
                 </div>
                 <div>
+                    <label class="block text-sm font-medium mb-1">কভার ছবির নাম (ঐচ্ছিক)</label>
+                    <input type="text" id="post-cover-input" placeholder="যেমন: FB_IMG_1786895478340.jpg" class="w-full px-3.5 py-2 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-500">
+                    <p class="text-xs text-slate-400 mt-1">GitHub রিপোজিটরিতে আপলোড করা ছবির সঠিক নামটি দিন।</p>
+                </div>
+                <div>
                     <label class="block text-sm font-medium mb-1">মূল লেখা</label>
-                    <textarea id="post-content-input" rows="6" required placeholder="আপনার অনুভূতি বা অভিজ্ঞতা বিস্তারিত লিখুন..." class="w-full px-3.5 py-2 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-500"></textarea>
+                    <textarea id="post-content-input" rows="5" required placeholder="আপনার অনুভূতি বা অভিজ্ঞতা বিস্তারিত লিখুন..." class="w-full px-3.5 py-2 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-500"></textarea>
                 </div>
                 <div class="flex justify-end gap-2 pt-2">
                     <button type="button" onclick="closeNewPostModal()" class="px-4 py-2 rounded-xl text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer">বাতিল</button>
                     <button type="submit" class="px-5 py-2 rounded-xl text-sm font-medium bg-brand-600 hover:bg-brand-700 text-white shadow-sm cursor-pointer">প্রকাশ করুন</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- New District Memory Modal -->
+    <div id="new-memory-modal" class="fixed inset-0 z-50 hidden bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-white dark:bg-slate-900 w-full max-w-md max-h-[90vh] overflow-y-auto rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-800">
+            <div class="px-6 py-4 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between">
+                <h3 class="font-serif font-bold text-lg text-slate-900 dark:text-white">নতুন জেলার স্মৃতি যোগ করুন</h3>
+                <button onclick="closeNewMemoryModal()" class="p-1.5 text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 rounded-lg cursor-pointer">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+            <form onsubmit="saveNewMemory(event)" class="p-6 space-y-4">
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium mb-1">জেলার নাম</label>
+                        <input type="text" id="mem-district-input" required placeholder="যেমন: কিশোরগঞ্জ" class="w-full px-3.5 py-2 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 focus:outline-none focus:ring-2 focus:ring-amber-500">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-1">ভ্রমণের সময়</label>
+                        <input type="text" id="mem-date-input" required placeholder="যেমন: আগস্ট, ২০২৬" class="w-full px-3.5 py-2 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 focus:outline-none focus:ring-2 focus:ring-amber-500">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium mb-1">দর্শনীয় স্থান / শিরোনাম</label>
+                    <input type="text" id="mem-place-input" required placeholder="যেমন: মিঠামইন হাওর ও অলওয়েদার সড়ক" class="w-full px-3.5 py-2 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 focus:outline-none focus:ring-2 focus:ring-amber-500">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium mb-1">ছবির ফাইল নাম (GitHub-এ আপলোড করা)</label>
+                    <input type="text" id="mem-image-input" required placeholder="যেমন: FB_IMG_1786895478340.jpg" class="w-full px-3.5 py-2 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 focus:outline-none focus:ring-2 focus:ring-amber-500">
+                    <p class="text-xs text-slate-400 mt-1">আগে GitHub রিপোজিটরিতে ছবিটি আপলোড করে হুবহু নামটি এখানে লিখুন।</p>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium mb-1">সংক্ষিপ্ত স্মৃতিকথা</label>
+                    <textarea id="mem-note-input" rows="3" required placeholder="এই ভ্রমণের প্রিয় কোনো মুহূর্ত লিখে রাখুন..." class="w-full px-3.5 py-2 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 focus:outline-none focus:ring-2 focus:ring-amber-500"></textarea>
+                </div>
+                <div class="flex justify-end gap-2 pt-2">
+                    <button type="button" onclick="closeNewMemoryModal()" class="px-4 py-2 rounded-xl text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer">বাতিল</button>
+                    <button type="submit" class="px-5 py-2 rounded-xl text-sm font-medium bg-amber-600 hover:bg-amber-700 text-white shadow-sm cursor-pointer">স্মৃতি সেভ করুন</button>
                 </div>
             </form>
         </div>
@@ -296,14 +391,12 @@
     </div>
 
     <script>
-        // Default Profile Data
         const defaultProfile = {
             title: "যাযাবরের ডায়েরি",
             tagline: "পথের বাঁকে কুড়িয়ে পাওয়া জীবনের গল্প ও নিভৃত ভাবনা",
             bio: "প্রতিদিনের ব্যস্ততার ফাঁকে দেখা প্রকৃতি, অচেনা পথের অভিজ্ঞতা, প্রিয় বইয়ের পাতা আর জীবনের ছোট ছোট উপলব্ধিগুলো শব্দে ধরে রাখার একান্ত ঠিকানা।"
         };
 
-        // Pre-loaded Rich Sample Posts
         const defaultPosts = [
             {
                 id: 1,
@@ -311,6 +404,7 @@
                 category: "ভ্রমণ",
                 date: "১৫ নভেম্বর, ২০২৬",
                 readTime: "৩ মিনিট পাঠ",
+                coverImage: "",
                 content: "বর্ষার শেষদিকে হাওরের রূপ যেন কোনো শিল্পীর ক্যানভাসে আঁকা ছবির মতো। যতদূর চোখ যায় শুধু অথৈ জল আর তার ওপর ভেসে থাকা ছোট ছোট দ্বীপের মতো গ্রাম।\n\nনৌকার গলুইয়ে বসে যখন বিকেলের নরম রোদ পানির ঢেউয়ে ঝিকমিক করতে দেখলাম, তখন মনে হলো শহরের যান্ত্রিক কোলাহল থেকে দূরে এই নিস্তব্ধতাই মানুষের আসল প্রশান্তি। মাঝির কণ্ঠে ভাটিয়ালি সুর আর দূরের আকাশে মেঘের ভেলা—সব মিলিয়ে বিকেলটা স্মৃতির পাতায় স্থায়ী হয়ে রইল।\n\nভ্রমণ আমাদের শুধু নতুন জায়গা দেখায় না, বরং নিজের ভেতরের ক্লান্তি ধুয়ে নতুন করে বাঁচতে শেখায়।"
             },
             {
@@ -319,6 +413,7 @@
                 category: "জীবনবোধ",
                 date: "০৪ নভেম্বর, ২০২৬",
                 readTime: "২ মিনিট পাঠ",
+                coverImage: "",
                 content: "খুব ভোরে যখন পাহাড়ের চূড়া থেকে সাদা কুয়াশা সরে গিয়ে প্রথম সূর্যের আলো গাছের পাতায় পড়ে, তখন প্রকৃতির এক অদ্ভুত স্নিগ্ধতা অনুভব করা যায়।\n\nচারপাশে পাখির কলতান, খোলা আকাশ আর হাতে ধোঁয়া ওঠা এক কাপ চা—জীবনের সবচেয়ে সুন্দর মুহূর্তগুলো আসলে খুব সাধারণ, কিন্তু আমরা প্রায়ই বড় কিছুর পেছনে ছুটতে গিয়ে এই ছোট্ট আনন্দগুলোকে উপেক্ষা করি।\n\nদিনের শুরুতে মাত্র দশ মিনিট প্রকৃতির সাথে নীরবে কাটানো পুরো দিনের কাজের ক্লান্তিকে অনেকটাই সহজ করে দেয়।"
             },
             {
@@ -327,6 +422,7 @@
                 category: "বই ও সিনেমা",
                 date: "২২ অক্টোবর, ২০২৬",
                 readTime: "৩ মিনিট পাঠ",
+                coverImage: "",
                 content: "পুরনো ইতিহাস ও ঐতিহ্যের বইগুলোর পাতা ওল্টালে এক অদ্ভুত ঘ্রাণ পাওয়া যায়, যা মুহূর্তেই আমাদের কয়েক দশক পেছনে ফিরিয়ে নিয়ে যায়।\n\nএকটি শহরের পুরনো স্থাপত্য, মানুষের জীবনযাত্রা আর হারিয়ে যাওয়া গল্পগুলো জানার মধ্য দিয়ে আমরা আমাদের শিকড়কে চিনতে পারি। ডিজিটাল স্ক্রিনের যুগেও একটি ভালো বইয়ের পাতায় ডুবে থাকার আনন্দ কখনো পুরনো হওয়ার নয়।\n\nপ্রতি সপ্তাহে অন্তত একটি নতুন অধ্যায় পড়া মনের খোরাক জোগানোর সেরা অভ্যাস।"
             },
             {
@@ -335,18 +431,30 @@
                 category: "গল্প",
                 date: "১০ অক্টোবর, ২০২৬",
                 readTime: "৪ মিনিট পাঠ",
+                coverImage: "",
                 content: "অক্টোবরের হঠাৎ বৃষ্টিতে মফস্বলের ছোট্ট রেলস্টেশনটা তখন প্রায় জনশূন্য। প্ল্যাটফর্মের টিনের চালে বৃষ্টির রিমঝিম শব্দের সাথে মিশে যাচ্ছিল দূরের রেললাইনের সিগন্যাল বাতির লাল-সবুজ আলো।\n\nবেঞ্চে বসে থাকা বৃদ্ধ ভদ্রলোক তার পুরনো ছাতাটা গুছিয়ে নিয়ে বললেন, 'জীবনটাও ঠিক এই স্টেশনের মতো বাবা—কেউ আগে নামে, কেউ পরের স্টেশনের অপেক্ষায় থাকে, কিন্তু ট্রেন কারো জন্য থেমে থাকে না।'\n\nকথাটা খুব সাধারণ হলেও বৃষ্টির ওই সন্ধ্যায় যেন গভীর এক দর্শনের মতো কানে বাজছিল।"
             }
         ];
 
-        // State Management
+        // Sample District Memories (Pre-loaded with your uploaded photo as example)
+        const defaultMemories = [
+            {
+                id: 101,
+                district: "কিশোরগঞ্জ",
+                place: "মিঠামইন হাওর ভ্রমণ",
+                date: "আগস্ট, ২০২৬",
+                image: "FB_IMG_1786895478340.jpg",
+                note: "দিগন্তছোঁয়া জলরাশি আর হাওরের নির্মল বাতাসে কাটানো অবিস্মরণীয় একটি দিন।"
+            }
+        ];
+
         let profile = JSON.parse(localStorage.getItem('jajabor_profile')) || defaultProfile;
         let posts = JSON.parse(localStorage.getItem('jajabor_posts')) || defaultPosts;
+        let memories = JSON.parse(localStorage.getItem('jajabor_memories')) || defaultMemories;
         let currentCategory = 'সব';
         let currentSearch = '';
         let activePostId = null;
 
-        // Initialize App
         function init() {
             if (localStorage.getItem('jajabor_theme') === 'dark') {
                 document.documentElement.classList.add('dark');
@@ -354,10 +462,10 @@
             }
             renderProfile();
             renderPosts();
+            renderMemories();
             lucide.createIcons();
         }
 
-        // Theme Toggle
         function toggleTheme() {
             const html = document.documentElement;
             const icon = document.getElementById('theme-icon');
@@ -373,9 +481,29 @@
             lucide.createIcons();
         }
 
-        // Render Profile
+        // Switch between Blog Posts and 64 Districts Memories
+        function switchMainTab(tab) {
+            const postsSec = document.getElementById('section-posts');
+            const memSec = document.getElementById('section-memories');
+            const btnPosts = document.getElementById('tab-btn-posts');
+            const btnMem = document.getElementById('tab-btn-memories');
+
+            if (tab === 'memories') {
+                postsSec.classList.add('hidden');
+                memSec.classList.remove('hidden');
+                btnMem.className = "px-4 py-2 rounded-xl text-sm font-semibold bg-amber-600 text-white shadow-sm transition flex items-center gap-1.5 cursor-pointer";
+                btnPosts.className = "px-4 py-2 rounded-xl text-sm font-semibold bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700 hover:border-brand-500 transition cursor-pointer";
+            } else {
+                memSec.classList.add('hidden');
+                postsSec.classList.remove('hidden');
+                btnPosts.className = "px-4 py-2 rounded-xl text-sm font-semibold bg-brand-600 text-white shadow-sm transition cursor-pointer";
+                btnMem.className = "px-4 py-2 rounded-xl text-sm font-semibold bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700 hover:border-amber-500 transition flex items-center gap-1.5 cursor-pointer";
+            }
+            lucide.createIcons();
+        }
+
         function renderProfile() {
-            document.title = `${profile.title} | ভ্রমণ, জীবনবোধ ও গল্পের সংকলন`;
+            document.title = `${profile.title} | ৬৪ জেলা ভ্রমণ, জীবনবোধ ও গল্পের সংকলন`;
             document.getElementById('nav-blog-title').textContent = profile.title;
             document.getElementById('hero-title').textContent = `স্বাগতম ${profile.title}তে`;
             document.getElementById('hero-tagline').textContent = profile.tagline;
@@ -384,7 +512,6 @@
             document.getElementById('photo-fallback').textContent = profile.title.trim().slice(0, 2);
         }
 
-        // Render Posts
         function renderPosts() {
             const container = document.getElementById('posts-container');
             const emptyState = document.getElementById('empty-state');
@@ -405,9 +532,15 @@
             emptyState.classList.add('hidden');
             container.innerHTML = filtered.map(post => {
                 const excerpt = post.content.replace(/\n+/g, ' ').slice(0, 145) + '...';
+                const coverHtml = post.coverImage ? `
+                    <div class="mb-4 -mx-6 -mt-6 h-48 overflow-hidden rounded-t-2xl border-b border-slate-100 dark:border-slate-800">
+                        <img src="${post.coverImage}" alt="${post.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.parentElement.style.display='none'">
+                    </div>
+                ` : '';
                 return `
-                <article onclick="openReadModal(${post.id})" class="group bg-white dark:bg-slate-900 rounded-2xl p-6 border border-slate-200/80 dark:border-slate-800 hover:border-brand-500/60 dark:hover:border-brand-500/60 shadow-sm hover:shadow-md transition-all cursor-pointer flex flex-col justify-between">
+                <article onclick="openReadModal(${post.id})" class="group bg-white dark:bg-slate-900 rounded-2xl p-6 border border-slate-200/80 dark:border-slate-800 hover:border-brand-500/60 dark:hover:border-brand-500/60 shadow-sm hover:shadow-md transition-all cursor-pointer flex flex-col justify-between overflow-hidden">
                     <div>
+                        ${coverHtml}
                         <div class="flex items-center justify-between gap-2 mb-3">
                             <span class="px-3 py-1 rounded-full text-xs font-medium bg-brand-50 text-brand-700 dark:bg-brand-900/40 dark:text-brand-100">
                                 ${post.category}
@@ -437,7 +570,44 @@
             lucide.createIcons();
         }
 
-        // Category Filter
+        // Render 64 District Memories
+        function renderMemories() {
+            const container = document.getElementById('memories-container');
+            const uniqueDistricts = new Set(memories.map(m => m.district.trim()));
+            const count = uniqueDistricts.size;
+            const percent = Math.min(100, Math.round((count / 64) * 100));
+
+            document.getElementById('hero-district-count').textContent = count;
+            document.getElementById('visited-count-text').textContent = `${count} টি জেলা`;
+            document.getElementById('visited-percent-text').textContent = `${percent}% (লক্ষ্য: ৬৪ জেলা)`;
+            document.getElementById('district-progress-bar').style.width = `${percent}%`;
+
+            container.innerHTML = memories.map(mem => `
+                <div class="bg-white dark:bg-slate-900 rounded-2xl overflow-hidden border border-slate-200/80 dark:border-slate-800 shadow-sm hover:shadow-md transition flex flex-col">
+                    <div class="relative h-52 bg-slate-100 dark:bg-slate-800 overflow-hidden">
+                        <img src="${mem.image}" alt="${mem.district} - ${mem.place}" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" onerror="this.src='FB_IMG_1786895478340.jpg'">
+                        <span class="absolute top-3 left-3 px-3 py-1 rounded-full text-xs font-semibold bg-amber-600 text-white shadow">
+                            ${mem.district}
+                        </span>
+                        <button onclick="deleteMemory(${mem.id})" title="মুছুন" class="absolute top-3 right-3 p-1.5 rounded-full bg-slate-900/60 text-white hover:bg-rose-600 transition cursor-pointer">
+                            <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+                        </button>
+                    </div>
+                    <div class="p-5 flex-1 flex flex-col justify-between">
+                        <div>
+                            <div class="text-xs text-slate-400 flex items-center gap-1 mb-1.5">
+                                <i data-lucide="calendar" class="w-3.5 h-3.5"></i> ${mem.date}
+                            </div>
+                            <h3 class="font-serif text-lg font-bold text-slate-900 dark:text-white mb-2">${mem.place}</h3>
+                            <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">${mem.note}</p>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+
+            lucide.createIcons();
+        }
+
         function filterByCategory(cat) {
             currentCategory = cat;
             document.querySelectorAll('.cat-btn').forEach(btn => {
@@ -450,24 +620,31 @@
             renderPosts();
         }
 
-        // Search Handler
         function handleSearch(val) {
             currentSearch = val;
             renderPosts();
         }
 
-        // Reset Filters
         function resetFilters() {
+            switchMainTab('posts');
             currentSearch = '';
             document.getElementById('search-input').value = '';
             filterByCategory('সব');
         }
 
-        // Read Modal
         function openReadModal(id) {
             const post = posts.find(p => p.id === id);
             if (!post) return;
             activePostId = id;
+
+            const coverWrapper = document.getElementById('modal-cover-wrapper');
+            const coverImg = document.getElementById('modal-cover-img');
+            if (post.coverImage) {
+                coverImg.src = post.coverImage;
+                coverWrapper.classList.remove('hidden');
+            } else {
+                coverWrapper.classList.add('hidden');
+            }
 
             document.getElementById('modal-category').textContent = post.category;
             document.getElementById('modal-date').innerHTML = `<i data-lucide="calendar" class="w-3.5 h-3.5"></i> ${post.date}`;
@@ -494,7 +671,6 @@
             renderPosts();
         }
 
-        // New Post Modal
         function openNewPostModal() {
             document.getElementById('new-post-modal').classList.remove('hidden');
         }
@@ -508,6 +684,7 @@
             const title = document.getElementById('post-title-input').value.trim();
             const category = document.getElementById('post-category-input').value;
             const date = document.getElementById('post-date-input').value.trim() || 'নতুন পোস্ট';
+            const coverImage = document.getElementById('post-cover-input').value.trim();
             const content = document.getElementById('post-content-input').value.trim();
 
             const wordCount = content.split(/\s+/).length;
@@ -518,6 +695,7 @@
                 title,
                 category,
                 date,
+                coverImage,
                 readTime: `${minutes} মিনিট পাঠ`,
                 content
             };
@@ -530,7 +708,45 @@
             resetFilters();
         }
 
-        // Profile Modal
+        // Memory Modal Functions
+        function openNewMemoryModal() {
+            document.getElementById('new-memory-modal').classList.remove('hidden');
+        }
+
+        function closeNewMemoryModal() {
+            document.getElementById('new-memory-modal').classList.add('hidden');
+        }
+
+        function saveNewMemory(e) {
+            e.preventDefault();
+            const district = document.getElementById('mem-district-input').value.trim();
+            const date = document.getElementById('mem-date-input').value.trim();
+            const place = document.getElementById('mem-place-input').value.trim();
+            const image = document.getElementById('mem-image-input').value.trim();
+            const note = document.getElementById('mem-note-input').value.trim();
+
+            memories.unshift({
+                id: Date.now(),
+                district,
+                date,
+                place,
+                image,
+                note
+            });
+
+            localStorage.setItem('jajabor_memories', JSON.stringify(memories));
+            e.target.reset();
+            closeNewMemoryModal();
+            renderMemories();
+            switchMainTab('memories');
+        }
+
+        function deleteMemory(id) {
+            memories = memories.filter(m => m.id !== id);
+            localStorage.setItem('jajabor_memories', JSON.stringify(memories));
+            renderMemories();
+        }
+
         function openProfileModal() {
             document.getElementById('prof-title-input').value = profile.title;
             document.getElementById('prof-tagline-input').value = profile.tagline;
@@ -554,22 +770,22 @@
             closeProfileModal();
         }
 
-        // Backup Posts as JSON file
-        function exportPostsJSON() {
-            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(posts, null, 2));
+        function exportAllDataJSON() {
+            const fullBackup = { profile, posts, memories };
+            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(fullBackup, null, 2));
             const downloadAnchor = document.createElement('a');
             downloadAnchor.setAttribute("href", dataStr);
-            downloadAnchor.setAttribute("download", "jajaborer-diary-posts.json");
+            downloadAnchor.setAttribute("download", "jajaborer-diary-full-backup.json");
             document.body.appendChild(downloadAnchor);
             downloadAnchor.click();
             downloadAnchor.remove();
         }
 
-        // Close modals on Escape key
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
                 closeReadModal();
                 closeNewPostModal();
+                closeNewMemoryModal();
                 closeProfileModal();
             }
         });
