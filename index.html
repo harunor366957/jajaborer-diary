@@ -125,7 +125,7 @@
                         </button>
                         <button onclick="switchMainTab('memories')" id="tab-btn-memories" class="px-4 py-2 rounded-xl text-sm font-semibold bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700 hover:border-amber-500 transition flex items-center gap-1.5 cursor-pointer">
                             <i data-lucide="map-pin" class="w-4 h-4 text-amber-500"></i>
-                            <span>৬৪ জেলা ভ্রমণ ও স্মৃতি (<span id="hero-district-count">০</span>/৬৪)</span>
+                            <span>৬৪ জেলা ভ্রমণ ও স্মৃতি (<span id="hero-district-count">১</span>/৬৪)</span>
                         </button>
                     </div>
                 </div>
@@ -154,7 +154,7 @@
         <div id="section-posts">
             <!-- Search & Category Filter Bar -->
             <div class="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4 mb-8">
-                <!-- Wrapped Categories (No horizontal scroll needed on mobile) -->
+                <!-- Wrapped Categories -->
                 <div id="category-tabs" class="flex flex-wrap items-center gap-2">
                     <button onclick="filterByCategory('সব')" data-cat="সব" class="cat-btn active px-4 py-1.5 rounded-full text-sm font-medium bg-brand-600 text-white transition whitespace-nowrap cursor-pointer">
                         সব লেখা
@@ -170,6 +170,18 @@
                     </button>
                     <button onclick="filterByCategory('বই ও সিনেমা')" data-cat="বই ও সিনেমা" class="cat-btn px-4 py-1.5 rounded-full text-sm font-medium bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-800 hover:border-brand-500 transition whitespace-nowrap cursor-pointer">
                         বই ও সিনেমা
+                    </button>
+                    <button onclick="filterByCategory('নিভৃত ভাবনা ও কবিতা')" data-cat="নিভৃত ভাবনা ও কবিতা" class="cat-btn px-4 py-1.5 rounded-full text-sm font-medium bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-800 hover:border-brand-500 transition whitespace-nowrap cursor-pointer">
+                        নিভৃত ভাবনা ও কবিতা
+                    </button>
+                    <button onclick="filterByCategory('ছবির গল্প')" data-cat="ছবির গল্প" class="cat-btn px-4 py-1.5 rounded-full text-sm font-medium bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-800 hover:border-brand-500 transition whitespace-nowrap cursor-pointer">
+                        ছবির গল্প
+                    </button>
+                    <button onclick="filterByCategory('প্রিয় উদ্ধৃতি ও নোট')" data-cat="প্রিয় উদ্ধৃতি ও নোট" class="cat-btn px-4 py-1.5 rounded-full text-sm font-medium bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-800 hover:border-brand-500 transition whitespace-nowrap cursor-pointer">
+                        প্রিয় উদ্ধৃতি ও নোট
+                    </button>
+                    <button onclick="filterByCategory('বইয়ের পাতায় যাত্রা')" data-cat="বইয়ের পাতায় যাত্রা" class="cat-btn px-4 py-1.5 rounded-full text-sm font-medium bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-800 hover:border-brand-500 transition whitespace-nowrap cursor-pointer">
+                        বইয়ের পাতায় যাত্রা
                     </button>
                 </div>
 
@@ -215,11 +227,11 @@
                 <!-- Progress Bar -->
                 <div class="space-y-1.5">
                     <div class="flex justify-between text-xs font-medium text-slate-600 dark:text-slate-300">
-                        <span>ভ্রমণ সম্পন্ন হয়েছে: <strong id="visited-count-text" class="text-brand-600 dark:text-brand-400">০ টি জেলা</strong></span>
-                        <span id="visited-percent-text">০% (লক্ষ্য: ৬৪ জেলা)</span>
+                        <span>ভ্রমণ সম্পন্ন হয়েছে: <strong id="visited-count-text" class="text-brand-600 dark:text-brand-400">১ টি জেলা</strong></span>
+                        <span id="visited-percent-text">২% (লক্ষ্য: ৬৪ জেলা)</span>
                     </div>
                     <div class="w-full h-3 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
-                        <div id="district-progress-bar" class="h-full bg-gradient-to-r from-brand-500 to-amber-500 rounded-full transition-all duration-500" style="width: 0%"></div>
+                        <div id="district-progress-bar" class="h-full bg-gradient-to-r from-brand-500 to-amber-500 rounded-full transition-all duration-500" style="width: 2%"></div>
                     </div>
                 </div>
             </div>
@@ -290,12 +302,16 @@
                 </div>
                 <div class="grid grid-cols-2 gap-4">
                     <div>
-                        <label class="block text-sm font-medium mb-1">ক্যাটাগরি</label>
+                        <label class="block text-sm font-medium mb-1">ক্যাটাগরি / কর্নার</label>
                         <select id="post-category-input" class="w-full px-3.5 py-2 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-500">
                             <option value="ভ্রমণ">ভ্রমণ</option>
                             <option value="জীবনবোধ">জীবনবোধ</option>
                             <option value="গল্প">গল্প</option>
                             <option value="বই ও সিনেমা">বই ও সিনেমা</option>
+                            <option value="নিভৃত ভাবনা ও কবিতা">নিভৃত ভাবনা ও কবিতা</option>
+                            <option value="ছবির গল্প">ছবির গল্প</option>
+                            <option value="প্রিয় উদ্ধৃতি ও নোট">প্রিয় উদ্ধৃতি ও নোট</option>
+                            <option value="বইয়ের পাতায় যাত্রা">বইয়ের পাতায় যাত্রা</option>
                         </select>
                     </div>
                     <div>
@@ -310,7 +326,7 @@
                 </div>
                 <div>
                     <label class="block text-sm font-medium mb-1">মূল লেখা</label>
-                    <textarea id="post-content-input" rows="5" required placeholder="আপনার অনুভূতি বা অভিজ্ঞতা বিস্তারিত লিখুন..." class="w-full px-3.5 py-2 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-500"></textarea>
+                    <textarea id="post-content-input" rows="5" required placeholder="আপনার অনুভূতি, কবিতা, উদ্ধৃতি, বইয়ের যাত্রা বা অভিজ্ঞতা লিখুন..." class="w-full px-3.5 py-2 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-500"></textarea>
                 </div>
                 <div class="flex justify-end gap-2 pt-2">
                     <button type="button" onclick="closeNewPostModal()" class="px-4 py-2 rounded-xl text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer">বাতিল</button>
@@ -401,15 +417,24 @@
         const defaultPosts = [
             {
                 id: 1,
+                title: "মগনামা ঘাটের গোধূলি আর আরিশার নৌকা",
+                category: "ভ্রমণ",
+                date: "২৪ নভেম্বর, ২০২৬",
+                readTime: "৩ মিনিট পাঠ",
+                coverImage: "",
+                content: "নদীর ধারে গোধূলির আলো ছড়িয়ে পড়তেই ঘাটের দৃশ্য বদলে যেতে থাকে। জলের ওপর হালকা বাতাস আর নৌকার দোলায় এক অন্যরকম শান্তি অনুভূত হয়।\n\nপথের বাঁকে দেখা এমন মুহূর্তগুলোই ডায়েরির পাতায় জায়গা করে নেয়, যেন সময়ের স্রোতে স্মৃতিগুলো হারিয়ে না যায়।"
+            },
+            {
+                id: 2,
                 title: "হাওরের বুকে এক বিকেল ও দিগন্তছোঁয়া জলরাশি",
                 category: "ভ্রমণ",
                 date: "১৫ নভেম্বর, ২০২৬",
                 readTime: "৩ মিনিট পাঠ",
                 coverImage: "",
-                content: "বর্ষার শেষদিকে হাওরের রূপ যেন কোনো শিল্পীর ক্যানভাসে আঁকা ছবির মতো। যতদূর চোখ যায় শুধু অথৈ জল আর তার ওপর ভেসে থাকা ছোট ছোট দ্বীপের মতো গ্রাম।\n\nনৌকার গলুইয়ে বসে যখন বিকেলের নরম রোদ পানির ঢেউয়ে ঝিকমিক করতে দেখলাম, তখন মনে হলো শহরের যান্ত্রিক কোলাহল থেকে দূরে এই নিস্তব্ধতাই মানুষের আসল প্রশান্তি। মাঝির কণ্ঠে ভাটিয়ালি সুর আর দূরের আকাশে মেঘের ভেলা—সব মিলিয়ে বিকেলটা স্মৃতির পাতায় স্থায়ী হয়ে রইল।\n\nভ্রমণ আমাদের শুধু নতুন জায়গা দেখায় না, বরং নিজের ভেতরের ক্লান্তি ধুয়ে নতুন করে বাঁচতে শেখায়।"
+                content: "বর্ষার শেষদিকে হাওরের রূপ যেন কোনো শিল্পীর ক্যানভাসে আঁকা ছবির মতো। যতদূর চোখ যায় শুধু অথৈ জল আর তার ওপর ভেসে থাকা ছোট ছোট দ্বীপের মতো গ্রাম।\n\nনৌকার গলুইয়ে বসে যখন বিকেলের নরম রোদ পানির ঢেউয়ে ঝিকমিক করতে দেখলাম, তখন মনে হলো শহরের যান্ত্রিক কোলাহল থেকে দূরে এই নিস্তব্ধতাই মানুষের আসল প্রশান্তি।\n\nভ্রমণ আমাদের শুধু নতুন জায়গা দেখায় না, বরং নিজের ভেতরের ক্লান্তি ধুয়ে নতুন করে বাঁচতে শেখায়।"
             },
             {
-                id: 2,
+                id: 3,
                 title: "পাহাড়ের কোলে ভোরের আলো ও এক কাপ চা",
                 category: "জীবনবোধ",
                 date: "০৪ নভেম্বর, ২০২৬",
@@ -418,7 +443,7 @@
                 content: "খুব ভোরে যখন পাহাড়ের চূড়া থেকে সাদা কুয়াশা সরে গিয়ে প্রথম সূর্যের আলো গাছের পাতায় পড়ে, তখন প্রকৃতির এক অদ্ভুত স্নিগ্ধতা অনুভব করা যায়।\n\nচারপাশে পাখির কলতান, খোলা আকাশ আর হাতে ধোঁয়া ওঠা এক কাপ চা—জীবনের সবচেয়ে সুন্দর মুহূর্তগুলো আসলে খুব সাধারণ, কিন্তু আমরা প্রায়ই বড় কিছুর পেছনে ছুটতে গিয়ে এই ছোট্ট আনন্দগুলোকে উপেক্ষা করি।\n\nদিনের শুরুতে মাত্র দশ মিনিট প্রকৃতির সাথে নীরবে কাটানো পুরো দিনের কাজের ক্লান্তিকে অনেকটাই সহজ করে দেয়।"
             },
             {
-                id: 3,
+                id: 4,
                 title: "পুরনো বইয়ের পাতায় খুঁজে পাওয়া হারানো সময়",
                 category: "বই ও সিনেমা",
                 date: "২২ অক্টোবর, ২০২৬",
@@ -427,7 +452,7 @@
                 content: "পুরনো ইতিহাস ও ঐতিহ্যের বইগুলোর পাতা ওল্টালে এক অদ্ভুত ঘ্রাণ পাওয়া যায়, যা মুহূর্তেই আমাদের কয়েক দশক পেছনে ফিরিয়ে নিয়ে যায়।\n\nএকটি শহরের পুরনো স্থাপত্য, মানুষের জীবনযাত্রা আর হারিয়ে যাওয়া গল্পগুলো জানার মধ্য দিয়ে আমরা আমাদের শিকড়কে চিনতে পারি। ডিজিটাল স্ক্রিনের যুগেও একটি ভালো বইয়ের পাতায় ডুবে থাকার আনন্দ কখনো পুরনো হওয়ার নয়।\n\nপ্রতি সপ্তাহে অন্তত একটি নতুন অধ্যায় পড়া মনের খোরাক জোগানোর সেরা অভ্যাস।"
             },
             {
-                id: 4,
+                id: 5,
                 title: "বৃষ্টিভেজা সন্ধ্যা ও স্টেশনের শেষ ট্রেন",
                 category: "গল্প",
                 date: "১০ অক্টোবর, ২০২৬",
