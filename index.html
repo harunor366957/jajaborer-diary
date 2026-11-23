@@ -98,13 +98,11 @@
         </div>
     </header>
 
-    <!-- Hero / Author Intro Section -->
+    <!-- Hero / Author Intro Section with Side Photo -->
     <section class="bg-gradient-to-b from-teal-50/70 to-transparent dark:from-slate-900/60 dark:to-transparent border-b border-slate-200/60 dark:border-slate-800/60">
         <div class="max-w-5xl mx-auto px-4 sm:px-6 py-10 sm:py-14">
-            <div class="flex flex-col md:flex-row items-center md:items-start gap-6 text-center md:text-left">
-                <div class="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl bg-gradient-to-br from-brand-500 to-teal-700 text-white flex items-center justify-center text-3xl font-serif font-bold shadow-md shrink-0">
-                    <span id="author-avatar">যা</span>
-                </div>
+            <div class="flex flex-col md:flex-row items-center justify-between gap-8 text-center md:text-left">
+                <!-- Left: Text Intro -->
                 <div class="flex-1">
                     <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-brand-100 text-brand-700 dark:bg-brand-900/50 dark:text-brand-100 mb-3">
                         <i data-lucide="feather" class="w-3.5 h-3.5"></i>
@@ -116,6 +114,20 @@
                     <p id="hero-bio" class="text-slate-600 dark:text-slate-300 text-base sm:text-lg max-w-2xl leading-relaxed">
                         প্রতিদিনের ব্যস্ততার ফাঁকে দেখা প্রকৃতি, অচেনা পথের অভিজ্ঞতা, প্রিয় বইয়ের পাতা আর জীবনের ছোট ছোট উপলব্ধিগুলো শব্দে ধরে রাখার একান্ত ঠিকানা।
                     </p>
+                </div>
+
+                <!-- Right: Side Photo Frame -->
+                <div class="shrink-0">
+                    <div class="relative w-44 h-44 sm:w-52 sm:h-52 rounded-2xl overflow-hidden border-4 border-white dark:border-slate-800 shadow-lg bg-gradient-to-br from-brand-500 to-teal-700 flex items-center justify-center">
+                        <img 
+                            id="side-photo" 
+                            src="FB_IMG_1786895478340.jpg" 
+                            alt="যাযাবরের ডায়েরি - লেখকের ছবি" 
+                            class="w-full h-full object-cover object-top"
+                            onerror="this.style.display='none'; document.getElementById('photo-fallback').classList.remove('hidden');"
+                        >
+                        <span id="photo-fallback" class="hidden text-white text-4xl font-serif font-bold">যা</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -238,7 +250,7 @@
                     </div>
                     <div>
                         <label class="block text-sm font-medium mb-1">তারিখ</label>
-                        <input type="text" id="post-date-input" value="২১ নভেম্বর, ২০২৬" class="w-full px-3.5 py-2 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-500">
+                        <input type="text" id="post-date-input" value="২৩ নভেম্বর, ২০২৬" class="w-full px-3.5 py-2 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-500">
                     </div>
                 </div>
                 <div>
@@ -291,7 +303,7 @@
             bio: "প্রতিদিনের ব্যস্ততার ফাঁকে দেখা প্রকৃতি, অচেনা পথের অভিজ্ঞতা, প্রিয় বইয়ের পাতা আর জীবনের ছোট ছোট উপলব্ধিগুলো শব্দে ধরে রাখার একান্ত ঠিকানা।"
         };
 
-        // Pre-loaded Rich Sample Posts (Visible immediately to all visitors on Google Chrome)
+        // Pre-loaded Rich Sample Posts
         const defaultPosts = [
             {
                 id: 1,
@@ -336,7 +348,6 @@
 
         // Initialize App
         function init() {
-            // Check saved theme
             if (localStorage.getItem('jajabor_theme') === 'dark') {
                 document.documentElement.classList.add('dark');
                 document.getElementById('theme-icon').setAttribute('data-lucide', 'sun');
@@ -370,7 +381,7 @@
             document.getElementById('hero-tagline').textContent = profile.tagline;
             document.getElementById('hero-bio').textContent = profile.bio;
             document.getElementById('footer-title').textContent = profile.title;
-            document.getElementById('author-avatar').textContent = profile.title.trim().slice(0, 2);
+            document.getElementById('photo-fallback').textContent = profile.title.trim().slice(0, 2);
         }
 
         // Render Posts
